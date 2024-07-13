@@ -8,7 +8,7 @@ using StudentManagement.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//nothin is adfded just to check doing this 
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
