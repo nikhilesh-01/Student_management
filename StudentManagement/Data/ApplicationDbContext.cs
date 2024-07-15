@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using StudentManagement.Data.Models;
+using StudentManagement.Shared.Models;
+
 
 namespace StudentManagement.Data
 {
