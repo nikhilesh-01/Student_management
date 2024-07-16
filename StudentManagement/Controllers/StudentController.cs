@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudentManagement.Shared.Models;
-using StudentsManagement.Shared.StudentRepository;
+using StudentManagement.Shared.StudentRepository;
 
 namespace StudentManagement.Controllers
 {
@@ -22,9 +22,9 @@ namespace StudentManagement.Controllers
         [HttpGet("All-Students")]
         public async Task<ActionResult<List<Student>>> GetAllStudentsAsync()
         {
-            var student = await _studentRepository.GetAllStudentsAsync();
+            var students = await _studentRepository.GetAllStudentsAsync();
 
-            return Ok(student);
+            return Ok(students);
         }
 
         //get student info with there ID's
@@ -36,14 +36,13 @@ namespace StudentManagement.Controllers
             return Ok(student);
         }
 
-            //Add student 
-            [HttpGet("Add-Students/{id}")]
-            public async Task<ActionResult<List<Student>>> AddStudentAsync(Student student)
-            {
-                var newstudent = await _studentRepository.AddStudentAsync(student);
+        [HttpPost("Add-Student")]
+        public async Task<ActionResult<Student>> AddNewStudentAsync(Student student)
+        {
+            var newstudent = await _studentRepository.AddStudentAsync(student);
 
-                return Ok(newstudent);
-            }
+            return Ok(newstudent);
+        }
 
         //Delete student
         [HttpGet("Delete-Student/{id}")]
@@ -52,6 +51,15 @@ namespace StudentManagement.Controllers
             var deletestudent = await _studentRepository.DeleteStudentAsync(id);
 
             return Ok(deletestudent);
+        }
+
+        //Update student 
+        [HttpPost("Update-Students")]
+        public async Task<ActionResult<List<Student>>> UpdateStudentAsync(Student student)
+        {
+            var updatestudent = await _studentRepository.UpdateStudentAsync(student);
+
+            return Ok(updatestudent);
         }
     }
 }

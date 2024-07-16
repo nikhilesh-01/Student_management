@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentsManagement.Shared.StudentRepository
+namespace StudentManagement.Shared.StudentRepository
 {
     public interface IStudentRepository
     {

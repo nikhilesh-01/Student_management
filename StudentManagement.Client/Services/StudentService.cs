@@ -1,16 +1,23 @@
 ﻿using StudentManagement.Shared.Models;
-using StudentsManagement.Shared.StudentRepository;
+using StudentManagement.Shared.StudentRepository;
+using System.Net.Http.Json;
 
 namespace StudentManagement.Client.Services
 {
     public class StudentService : IStudentRepository
     {
-
-        public  StudentService() { }
-
-        public Task<Student> AddStudentAsync(Student student)
+        private readonly HttpClient _httpClient;
+        public  StudentService(HttpClient _httpClient) 
         {
-            throw new NotImplementedException();
+            this._httpClient = _httpClient;
+        
+        }
+
+        public async Task<Student> AddStudentAsync(Student student)
+        {
+            var newstudent = await _httpClient.PostAsJsonAsync("api/Student/Add-Student", student);
+            var response = await newstudent.Content.ReadFromJsonAsync<Student>();
+            return response;
         }
 
         public Task<Student> DeleteStudentAsync(int student)
@@ -18,19 +25,25 @@ namespace StudentManagement.Client.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<Student>> GetAllStudentsAsync()
+        public async Task<List<Student>> GetAllStudentsAsync()
         {
-            throw new NotImplementedException();
+            var allstudent = await _httpClient.GetAsync("api/Student/All-Students");
+            var response = await allstudent.Content.ReadFromJsonAsync<List<Student>>();
+            return response;
         }
 
-        public Task<Student> GetAllStudentsByIdAsync(int studentId)
+        public async Task<Student> GetAllStudentsByIdAsync(int studentId)
         {
-            throw new NotImplementedException();
+            var singlestudent = await _httpClient.GetAsync("api/Student/Single-Student");
+            var response = await singlestudent.Content.ReadFromJsonAsync<Student>();
+            return response;
         }
 
-        public Task<Student> UpdateStudentAsync(Student student)
+        public  async Task<Student> UpdateStudentAsync(Student student)
         {
-            throw new NotImplementedException();
+            var updatestudent = await _httpClient.PostAsJsonAsync("api/Student/Update-Student", student);
+            var response = await updatestudent.Content.ReadFromJsonAsync<Student>();
+            return response;
         }
     }
 }  
