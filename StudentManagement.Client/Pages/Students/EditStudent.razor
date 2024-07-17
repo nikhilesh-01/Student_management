@@ -1,0 +1,94 @@
+﻿@page "/student/edit/{id:int}"
+@using StudentManagement.Client.Services
+@using StudentManagement.Shared.Models
+@inject NavigationManager navigation
+@inject IJSRuntime JsRuntime
+@inject StudentService StudentService
+
+<h3>Update Student Details</h3>
+<hr />
+<EditForm Model="@studobj" OnValidSubmit="UpdateStudent" FormName="updateStudent">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>First Name:</label>
+                        <InputText @bind-Value="studobj.FirstName" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Middle Name:</label>
+                        <InputText @bind-Value="studobj.MiddleName" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Last Name:</label>
+                        <InputText @bind-Value="studobj.LastName" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Email Address:</label>
+                        <InputText @bind-Value="studobj.EmailAddress" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Student Address:</label>
+                        <InputText @bind-Value="studobj.Address" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Student Phone Number:</label>
+                        <InputText @bind-Value="studobj.PhoneNumber" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Student Country:</label>
+                        <InputText @bind-Value="studobj.Country" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary">Create Student</button>
+                <button type="button" @onclick="Cancel" class="btn btn-danger">Cancel</button>
+            </div>
+</EditForm>
+
+
+@code {
+
+    [SupplyParameterFromForm]
+    public Student studobj { get; set; } = new();
+
+    [Parameter]
+    public int id { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadStudents();
+    }
+    public async Task LoadStudents()
+    {
+        studobj = await StudentService.GetAllStudentsByIdAsync();
+    }
+
+    protected async Task UpdateStudent()
+    {
+        var result = await StudentService.UpdateStudentAsync(studobj);
+        navigation.NavigateTo("/students-list"); // Redirect after saving
+    }
+
+    public void Cancel()
+    {
+        navigation.NavigateTo("/students-list"); // Redirect to students list
+    }
+}

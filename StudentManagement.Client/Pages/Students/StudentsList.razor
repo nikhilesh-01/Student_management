@@ -75,8 +75,10 @@
 
     public List<Student> AllStudents { get; set; } = new();
 
-
-
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAlLStudents();
+    }
     public async Task LoadAlLStudents()
     {
         // var students = await GenericService.GetAllAsync(student, "api/Student/All-Students");
@@ -89,8 +91,5 @@
             AllStudents.Add(student);
         }
     }
-    protected override async Task OnInitializedAsync()
-    {
-        await LoadAlLStudents();
-    }
+    
 }
