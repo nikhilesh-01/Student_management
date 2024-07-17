@@ -12,8 +12,8 @@ builder.Services.AddSingleton<AuthenticationStateProvider, PersistentAuthenticat
 
 
 //register the service
-
 builder.Services.AddScoped<IStudentRepository, StudentService>();
+builder.Services.AddScoped<StudentService>(); // Register StudentService
 
 builder.Services.AddScoped(http => new HttpClient
 {

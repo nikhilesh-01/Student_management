@@ -7,7 +7,7 @@ namespace StudentManagement.Client.Services
     public class StudentService : IStudentRepository
     {
         private readonly HttpClient _httpClient;
-        public  StudentService(HttpClient _httpClient) 
+        public StudentService(HttpClient _httpClient) 
         {
             this._httpClient = _httpClient;
         
@@ -15,10 +15,11 @@ namespace StudentManagement.Client.Services
 
         public async Task<Student> AddStudentAsync(Student student)
         {
-            var newstudent = await _httpClient.PostAsJsonAsync("api/Student/Add-Student", student);
-            var response = await newstudent.Content.ReadFromJsonAsync<Student>();
-            return response;
+            var response = await _httpClient.PostAsJsonAsync("api/Student/Add-Student", student);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<Student>();
         }
+
 
         public Task<Student> DeleteStudentAsync(int student)
         {
