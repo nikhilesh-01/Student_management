@@ -61,7 +61,7 @@ namespace StudentManagement.Controllers
         {
             var updatestudent = await _studentRepository.UpdateStudentAsync(student);
 
-            return Ok(updatestudent);
+            return Ok(updatestudent);//
         }
     }
 }
