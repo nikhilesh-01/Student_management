@@ -52,7 +52,7 @@ namespace StudentManagement.Controllers
         {
             var deletestudent = await _studentRepository.DeleteStudentAsync(id);
 
-            return Ok(deletestudent);
+            return Ok(deletestudent);//
         }
 
         //Update student 
