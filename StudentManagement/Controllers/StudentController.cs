@@ -33,7 +33,7 @@ namespace StudentManagement.Controllers
         [HttpGet("Single-Student/{id}")]
         public async Task<ActionResult<List<Student>>> GetSingleStudentsAsync(int id)
         {
-            var student = await _studentRepository.GetAllStudentsByIdAsync(id);
+            var student = await _studentRepository.GetAllStudentsByIdAsync(id);     
 
             return Ok(student);
         }
