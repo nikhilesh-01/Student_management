@@ -51,8 +51,8 @@ namespace StudentManagement.Controllers
         public async Task<ActionResult<List<Student>>> DeleteStudentAsync(int id)
         {
             var deletestudent = await _studentRepository.DeleteStudentAsync(id);
-
-            return Ok(deletestudent);//
+              
+            return Ok(deletestudent);
         }
 
         //Update student 
@@ -61,7 +61,7 @@ namespace StudentManagement.Controllers
         {
             var updatestudent = await _studentRepository.UpdateStudentAsync(student);
 
-            return Ok(updatestudent);//
+            return Ok(updatestudent);
         }
     }
 }
