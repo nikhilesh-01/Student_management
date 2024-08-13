@@ -46,11 +46,11 @@ builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSe
 builder.Services.AddScoped<IStudentRepository, StudentsRepositoy>();
 
 //register http client
-builder.Services.AddScoped(http => new HttpClient
+builder.Services.AddScoped(http => new HttpClient 
 {
     BaseAddress = new Uri(builder.Configuration.GetSection("BaseAddress").Value!)
 });
-
+        
 
 var app = builder.Build();
 
