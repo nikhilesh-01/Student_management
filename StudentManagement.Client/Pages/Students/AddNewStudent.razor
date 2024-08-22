@@ -3,6 +3,7 @@
 @using StudentManagement.Shared.Models
 @inject NavigationManager navigation;
 @inject IJSRuntime JsRuntime
+@inject IStudentRepository StudentService
 
 
 <h3>Add New Student</h3>
@@ -77,12 +78,29 @@
             Country = string.Empty
         };
 
+    // protected async Task CreateStudent()
+    // {
+    //     var result = await StudentService.AddStudentAsync(studobj);
+    //     // Logic to save the student
+    //     navigation.NavigateTo("/students-list"); // Redirect after saving
+    // }
     protected async Task CreateStudent()
     {
-        var result = await StudentService.AddStudentAsync(studobj);
-        // Logic to save the student
-        navigation.NavigateTo("/students-list"); // Redirect after saving
+        if (studobj != null)
+        {
+            var result = await StudentService.AddStudentAsync(studobj);
+            if (result != null)
+            {
+                navigation.NavigateTo("/students-list");
+            }
+            else
+            {
+                // Handle failure (e.g., display an error message)
+                await JsRuntime.InvokeVoidAsync("alert", "Failed to create student.");
+            }
+        }
     }
+
 
     public void Cancel()
     {
