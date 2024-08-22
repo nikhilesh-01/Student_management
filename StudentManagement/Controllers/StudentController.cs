@@ -38,6 +38,7 @@ namespace StudentManagement.Controllers
             return Ok(student);
         }
 
+        //add student
         [HttpPost("Add-Student")]
         public async Task<ActionResult<Student>> AddNewStudentAsync(Student student)
         {
