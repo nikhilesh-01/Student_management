@@ -50,7 +50,7 @@ builder.Services.AddScoped(http => new HttpClient
 {
     BaseAddress = new Uri(builder.Configuration.GetSection("BaseAddress").Value!)
 });
-        
+                  
 
 var app = builder.Build();
 
