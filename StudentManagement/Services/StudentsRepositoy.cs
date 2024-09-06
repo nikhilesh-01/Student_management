@@ -17,7 +17,7 @@ namespace StudentManagement.Services
 
         public async Task<Student> AddStudentAsync(Student student)
         {
-            if(student == null) throw new ArgumentNullException();
+            if(student == null) throw new ArgumentNullException();  
             var newstudent  = _context.Students.Add(student).Entity;
             await _context.SaveChangesAsync();
 
