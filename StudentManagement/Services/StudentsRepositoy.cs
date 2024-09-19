@@ -51,7 +51,6 @@ namespace StudentManagement.Services
             return singlestudent;
         } 
 
-
         public async Task<Student?> UpdateStudentAsync(Student student)
         {
             if (student == null) return null;
