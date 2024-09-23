@@ -41,7 +41,6 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
-
 //Adding service
 builder.Services.AddScoped<IStudentRepository, StudentsRepositoy>();
 
